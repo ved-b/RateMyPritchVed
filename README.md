@@ -31,8 +31,11 @@ In this verison of our project, we worked through the database systems for the l
   
   Sample outputs for the Review System -
   
-  
-  
+  <img src = "https://user-images.githubusercontent.com/48756230/201819395-ce065a61-78df-4e6b-b1c6-fb7fd52224d5.jpeg" width = "400"/>
+  <img src = "https://user-images.githubusercontent.com/48756230/201819397-cb2d46e3-129a-4f10-a140-f090ce561c88.jpeg" width = "400"/>
+  <img src = "https://user-images.githubusercontent.com/48756230/201819399-805e8559-fdd2-4a4e-ae97-63dfd703230d.jpeg" width = "400"/>
+  <img src = "https://user-images.githubusercontent.com/48756230/201819400-e11738ad-3690-4456-bdc4-881f1e279f5b.jpeg" width = "400"/>
+
   
 - Webscraping Nutrislice
   Exported the Nutrislice website, and used open-sourced libraries to convert it into a csv file. Then, via SQL select statements the csv file strings are then extract the daily menu information into the User-Interface system for the users to then leave reviews on. 
