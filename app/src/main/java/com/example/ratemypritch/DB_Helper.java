@@ -1,11 +1,27 @@
 package com.example.ratemypritch;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import com.opencsv.CSVReader;
+import com.opencsv.exceptions.CsvValidationException;
+
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.Charset;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.FileReader;
 
 public class DB_Helper extends SQLiteOpenHelper {
 
@@ -20,6 +36,8 @@ public class DB_Helper extends SQLiteOpenHelper {
         MyDB.execSQL("create Table ratings(ratingid INTEGER primary key, rating FLOAT)");
         MyDB.execSQL("create Table users(username TEXT primary key, password TEXT)");
         MyDB.execSQL("create Table reviews(reviewid INTEGER primary key, reviewhead TEXT, reviewbot TEXT, ratingid INTEGER)");
+        MyDB.execSQL("create Table menu(date DATE primary key, pizza TEXT, chefTable TEXT, pasta TEXT, grill TEXT)");
+        getMenu();
 
     }
 
@@ -28,6 +46,7 @@ public class DB_Helper extends SQLiteOpenHelper {
         MyDB.execSQL("drop Table if exists ratings");
         MyDB.execSQL("drop Table if exists users");
         MyDB.execSQL("drop Table if exists reviews");
+        MyDB.execSQL("drop Table if exists menu");
     }
 
     public Boolean insertData(String username, String password){
@@ -62,6 +81,35 @@ public class DB_Helper extends SQLiteOpenHelper {
         if(result==-1) return false;
         else
             return true;
+    }
+
+    public void getMenu(){
+        SQLiteDatabase MyDB = this.getWritableDatabase();
+        String[] date = {"2022-11-13", "2022-11-14", "2022-11-15", "2022-11-16", "2022-11-17", "2022-11-18", "2022-11-19"};
+        String[] pizza = {"MUSHROOM BIANCA PIZZA,CHICKEN BIANCA", "MARGHERITA PIZZA,PEPPERONI PIZZA", "SIMPLE FLORENTINE DELIGHT,P-P-PORKIE'S P-P-PIZZA", "HIT THE ROAD JACKfruit,DELUXE", "ZESTY FIESTA PIZZA,Cajun chicken Pizza", "4 cheese pizza,SAVOURY COWBOY PIZZA", "NOT CHO PIZZA,CORD EN BLEU PIZZA"};
+        String[] ct = {"CITRUS CHILI SNAPPER,CITRUS CHILI TOFU STEAKS", "TANDOORI CHICKEN,TOFU ALOO GOBI", "SHERRY BRAISED PORK CHEEKS,APPLE JACKS", "BEEF STROGANOFF,MUSHROOM STROGANOFF", "BUTTER CHICKEN,BUTTER CHICKPEAS", "BRAISED BEEF RAVIOLI,BABY SPINACH SALAD", "PEROGIES,LENTIL SHEPARDS PIE"};
+        String[] pasta = {"PAD THAI WITH SOY CURLS,SHRIMP PAD THAI", "TTEOKBOKKI, SAMPLE", "PORK DAN DAN NOODLES,TOFU DAN DAN NOODLES", "CHICKEN YAKI UDON,YAKI UDON WITH SOY CURLS", "BIBIM NOODLES WITH EGG,BIBIM NOODLES WITH TOFU", "PORK SHANGHAI FRIED NOODLES,TOFU SHANGHAI NOODLES", "CRISPY SHRIMP ZARU SOBA,CRISPY TOFU ZARU SOBA"};
+        String[] grill = {"GREEK CHILI BURGER,BEYOND GREEK CHILI BURGER", "BEEF DIPPIN,MUSHROOM DIPPIN", "SALMON POWER BOWL,TOFU POWER BOWL", "CHICKEN WINGS,CAULIFLOWER WINGS", "CHICKEN TENDERS,BEYOND TENDERS", "FISH & CHIPS,MUSHROOM CALAMARI", "CHICAGO DOG,BEYOND THE CHICAGO DOG"};
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("date", String.valueOf(date[0]));
+        contentValues.put("pizza", pizza[0]);
+        contentValues.put("chefTable", ct[0]);
+        contentValues.put("pasta", pasta[0]);
+        contentValues.put("grill", grill[0]);
+        MyDB.insert("menu", null, contentValues);
+        /*
+        for (int i = 0; i < 6; i++){
+            ContentValues contentValues = new ContentValues();
+            contentValues.put("date", String.valueOf(date[i]));
+            contentValues.put("pizza", pizza[i]);
+            contentValues.put("chefTable", ct[i]);
+            contentValues.put("pasta", pasta[i]);
+            contentValues.put("grill", grill[i]);
+            MyDB.insert("menu", null, contentValues);
+        }
+
+         */
+
     }
 
     public int ratingidassign() {
