@@ -27,6 +27,7 @@ public class sign_up_page extends AppCompatActivity {
         sign_up_later = findViewById(R.id.button2);
         DB = new DB_Helper(this);
 
+
         Intent intent = new Intent(this, LandingPage.class);
         back_button.setOnClickListener(new View.OnClickListener() {
 
@@ -57,6 +58,8 @@ public class sign_up_page extends AppCompatActivity {
 //                    Toast.makeText(getApplicationContext(), "No values for signup", Toast.LENGTH_SHORT).show();
 //                }
 
+
+
                 String user = email_signup.getText().toString();
                 String pass = password_signup.getText().toString();
                 String repass = repassword_signup.getText().toString();
@@ -64,16 +67,20 @@ public class sign_up_page extends AppCompatActivity {
                 if(user.equals("")||pass.equals("")||repass.equals(""))
                     Toast.makeText(sign_up_page.this, "Enter all the fields", Toast.LENGTH_SHORT).show();
                 else{
+
                     if(pass.equals(repass)){
                         Boolean checkuser = DB.checkusername(user);
                         if(checkuser==false){
                             Boolean insert = DB.insertData(user, pass);
                             if(insert==true){
-                                Toast.makeText(sign_up_page.this, "User Registered successfully!", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(getApplicationContext(),LandingPage.class);
-                                startActivity(intent);
+
+                                Toast.makeText(sign_up_page.this, "Redirecting to captcha", Toast.LENGTH_SHORT).show();
+                                Intent i = new Intent(getApplicationContext(), captcha.class);
+                                startActivity(i);
+                                finish();
                             }else{
                                 Toast.makeText(sign_up_page.this, "Sign-up failed!", Toast.LENGTH_SHORT).show();
+
                             }
                         }
                         else{
