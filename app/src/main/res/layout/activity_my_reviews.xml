@@ -161,6 +161,20 @@
         app:srcCompat="@drawable/home_button" />
 
     <ImageButton
+        android:id="@+id/imageButton454"
+        android:layout_width="69dp"
+        android:layout_height="63dp"
+        android:background="#0000"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.482"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.994"
+        app:srcCompat="@drawable/pinunfilled" />
+
+    <ImageButton
         android:id="@+id/Settings"
         android:layout_width="85dp"
         android:layout_height="68dp"

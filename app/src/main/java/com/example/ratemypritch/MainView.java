@@ -25,6 +25,7 @@ public class MainView extends AppCompatActivity {
         chef = (ImageButton) findViewById(R.id.imageButton3);
         dessert = (ImageButton) findViewById(R.id.imagebutton);
         RatingBar stars = (RatingBar) findViewById(R.id.ratingBar);
+        ImageButton location = (ImageButton) findViewById(R.id.imageButton4);
 
         Intent rating  = getIntent();
         Bundle bundle = rating.getExtras();
@@ -87,6 +88,14 @@ public class MainView extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(desserted);
+            }
+        });
+
+        Intent location_intent = new Intent(this, PritchardMap.class);
+        location.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(location_intent);
             }
         });
     }

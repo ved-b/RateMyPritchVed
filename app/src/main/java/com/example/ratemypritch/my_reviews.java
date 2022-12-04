@@ -24,6 +24,7 @@ public class my_reviews extends AppCompatActivity {
         Intent rating  = getIntent();
         Bundle bundle = rating.getExtras();
         Bundle bundle2 = new Bundle();
+        ImageButton location = (ImageButton) findViewById(R.id.imageButton454);
 
         if (rating.hasExtra("review")) {
             Float review = bundle.getFloat("review");
@@ -54,6 +55,13 @@ public class my_reviews extends AppCompatActivity {
                 bundle2.putFloat("rating", ratingbar.getRating());
                 intent2.putExtras(bundle2);
                 startActivity(intent2);
+            }
+        });
+        Intent location_intent = new Intent(this, PritchardMap.class);
+        location.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(location_intent);
             }
         });
 
